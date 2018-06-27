@@ -1,0 +1,15 @@
+<% include partials/header %>
+    <ul>
+        <% libraries.forEach( library => { %>
+            <li>
+                <%= library.name %> <br/>
+                <%= library.location %> <br/>
+                <%= library.rating %> 
+            </li>
+        <% }); %>
+    </ul>
+    
+    <a href="/libraries/new">
+        Add new library
+    </a>
+<% include partials/footer %>

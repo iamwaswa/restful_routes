@@ -1,0 +1,11 @@
+<% include partials/header %>
+    <form action="/libraries" method="POST">
+        <input placeholder="name"type="text" name="library[name]"/>
+        <br/>
+        <input placeholder="location"type="text" name="library[location]"/>
+        <br/>
+        <input placeholder="rating"type="text" name="library[rating]"/>
+        <br/>
+        <button>Submit</button>
+    </form>
+<% include partials/footer %>

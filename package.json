@@ -1,0 +1,26 @@
+{
+  "name": "restful_routes",
+  "version": "1.0.0",
+  "description": "package.json file for restful_routes",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamwaswa/restful_routes.git"
+  },
+  "author": "Waswa Olunga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iamwaswa/restful_routes/issues"
+  },
+  "homepage": "https://github.com/iamwaswa/restful_routes#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "ejs-lint": "^0.3.0",
+    "express": "^4.16.3",
+    "method-override": "^2.3.10"
+  }
+}
