@@ -7,34 +7,34 @@ APP.set(`view engine`, `ejs`);
 APP.use(EXPRESS.static(`public`));
 APP.use(BODY_PARSER.urlencoded({ extended: true }));
 
-const LIBRARIES = [{
-        id: generateRandomIntegerID(),
+let libraries = [{
+        id: 0,
         name: `Coquitlam Public Library`,
         location: `Coquitlam`,
-        rating: 4
+        rating: 4,
+        description: `The finest library in Coquitlam`
     },
     {
-        id: generateRandomIntegerID(),
+        id: 1,
         name: `Vancouver Public Library`,
         location: `Vancouver`,
-        rating: 5
+        rating: 5,
+        description: `Vancouver has never seen a better library`
     },
     {
-        id: generateRandomIntegerID(),
+        id: 2,
         name: `Burnaby Public Library`,
         location: `Burnaby`,
-        rating: 3
+        rating: 3,
+        description: `When you are in Burnaby you have to check out this library`
     }
 ];
 
-function generateRandomIntegerID() {
-    return Number.parseInt(Math.random() * 10000);
-}
 
 // INDEX
 APP.get(`/libraries`, (req, res) => {
     res.render(`index`, {
-        libraries: LIBRARIES
+        libraries: libraries
     });
 });
 
@@ -46,14 +46,25 @@ APP.get(`/libraries/new`, (req, res) => {
 // CREATE
 APP.post(`/libraries`, (req, res) => {
     let newLibrary = req.body.library;
-    newLibrary.id = generateRandomIntegerID();
-    LIBRARIES.push(newLibrary);
+    newLibrary.id = getNextID();
+    libraries.push(newLibrary);
     res.redirect(`/libraries`);
 });
 
+function getNextID() {
+    let maxID = libraries.reduce((nextID, library) => 
+        nextID < library.id ? library.id : nextID, 0);
+    return ++maxID;
+}
+
 // SHOW
 APP.get(`/libraries/:id`, (req, res) => {
-
+    let clickedLibraryID = Number.parseInt(req.params.id);
+    let libraryToShow = libraries.reduce( (clickedLibrary, currentLibrary) => {
+        return currentLibrary.id === clickedLibraryID ? currentLibrary : clickedLibrary;
+    }, {});
+    
+    res.render(`show`, {library: libraryToShow});
 });
 
 // EDIT

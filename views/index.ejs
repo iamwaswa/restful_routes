@@ -2,9 +2,11 @@
     <ul>
         <% libraries.forEach( library => { %>
             <li>
-                <%= library.name %> <br/>
-                <%= library.location %> <br/>
-                <%= library.rating %> 
+                <a href="/libraries/<%= library.id %>">
+                    <%= library.name %>, 
+                    <%= library.location %>, 
+                    <%= library.rating %> 
+                </a>
             </li>
         <% }); %>
     </ul>

@@ -1,11 +1,12 @@
 <% include partials/header %>
     <form action="/libraries" method="POST">
-        <input placeholder="name"type="text" name="library[name]"/>
+        <input placeholder="name" type="text" name="library[name]"/>
         <br/>
-        <input placeholder="location"type="text" name="library[location]"/>
+        <input placeholder="location" type="text" name="library[location]"/>
         <br/>
-        <input placeholder="rating"type="text" name="library[rating]"/>
+        <input placeholder="rating" type="text" name="library[rating]"/>
         <br/>
+        <input placeholder="description" type="text" value= "Stuff is cool here!!!" name="library[description]"/>
         <button>Submit</button>
     </form>
 <% include partials/footer %>
