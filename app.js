@@ -6,6 +6,7 @@ const APP             = EXPRESS();
 APP.set(`view engine`, `ejs`);
 APP.use(EXPRESS.static(`public`));
 APP.use(BODY_PARSER.urlencoded({ extended: true }));
+APP.use(METHOD_OVERRIDE(`_method`));
 
 let libraries = [{
         id: 0,
