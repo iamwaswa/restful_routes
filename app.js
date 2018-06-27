@@ -1,7 +1,6 @@
 const EXPRESS         = require(`express`);
 const BODY_PARSER     = require(`body-parser`);
 const METHOD_OVERRIDE = require(`method-override`);
-const EJS_LINT        = require(`ejs-lint`);
 const APP             = EXPRESS();
 
 APP.set(`view engine`, `ejs`);
