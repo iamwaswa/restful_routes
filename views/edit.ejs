@@ -1,0 +1,17 @@
+<% include partials/header %>
+    <form action="/libraries/<%= libraryToEdit.id %>?_method=PUT" method="POST">
+        <input required name="library[name]" value="<%= libraryToEdit.name %>" placeholder="name"/>
+        <br/>
+        <input required name="library[location]" value="<%= libraryToEdit.location %>" placeholder="location"/>
+        <br/>
+        <input required name="library[rating]" value="<%= libraryToEdit.rating %>" placeholder="rating"/>
+        <br/>
+        <input required name="library[description]" value="<%- libraryToEdit.description %>" placeholder="description"/>
+        <br/>
+        <button>Submit</button>
+    </form>
+    
+    <a href="/libraries">
+        Go back
+    </a>
+<% include partials/footer %>

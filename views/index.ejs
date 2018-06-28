@@ -7,6 +7,12 @@
                     <%= library.location %>, 
                     <%= library.rating %> 
                 </a>
+                <a href="/libraries/<%= library.id %>/edit">
+                    Edit Library
+                </a>
+                <form action="/libraries/<%= library.id %>/delete?_method=DELETE" method="POST">
+                    <input type="submit" value="Delete"/>
+                </form>
             </li>
         <% }); %>
     </ul>
