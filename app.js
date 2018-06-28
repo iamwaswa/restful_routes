@@ -1,14 +1,16 @@
-const EXPRESS         = require(`express`);
-const BODY_PARSER     = require(`body-parser`);
-const METHOD_OVERRIDE = require(`method-override`);
-const APP             = EXPRESS();
+const EXPRESS           = require(`express`);
+const BODY_PARSER       = require(`body-parser`);
+const METHOD_OVERRIDE   = require(`method-override`);
+const EXPRESS_SANITIZER = require(`express-sanitizer`);
+const APP               = EXPRESS();
 
 APP.set(`view engine`, `ejs`);
 APP.use(EXPRESS.static(`public`));
 APP.use(BODY_PARSER.urlencoded({ extended: true }));
+APP.use(EXPRESS_SANITIZER());
 APP.use(METHOD_OVERRIDE(`_method`));
 
-let libraries = [{
+const LIBRARIES = [{
         id: 0,
         name: `Coquitlam Public Library`,
         location: `Coquitlam`,
@@ -35,7 +37,7 @@ let libraries = [{
 // INDEX
 APP.get(`/libraries`, (req, res) => {
     res.render(`index`, {
-        libraries: libraries
+        libraries: LIBRARIES
     });
 });
 
@@ -48,22 +50,20 @@ APP.get(`/libraries/new`, (req, res) => {
 APP.post(`/libraries`, (req, res) => {
     let newLibrary = req.body.library;
     newLibrary.id = getNextID();
-    libraries.push(newLibrary);
+    LIBRARIES.push(newLibrary);
     res.redirect(`/libraries`);
 });
 
 function getNextID() {
-    let maxID = libraries.reduce((nextID, library) => 
-        nextID < library.id ? library.id : nextID, 0);
-    return ++maxID;
+    return LIBRARIES.length;
 }
 
 // SHOW
 APP.get(`/libraries/:id`, (req, res) => {
     let clickedLibraryID = Number.parseInt(req.params.id);
-    let libraryToShow = libraries.reduce( (clickedLibrary, currentLibrary) => {
-        return currentLibrary.id === clickedLibraryID ? currentLibrary : clickedLibrary;
-    }, {});
+    let libraryToShow = LIBRARIES.reduce((clickedLibrary, currentLibrary) => 
+        currentLibrary.id === clickedLibraryID ? currentLibrary : clickedLibrary, {}
+    );
     
     res.render(`show`, {library: libraryToShow});
 });
