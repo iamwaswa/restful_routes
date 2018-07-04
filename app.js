@@ -6,9 +6,7 @@ const APP = EXPRESS();
 
 APP.set(`view engine`, `ejs`);
 APP.use(EXPRESS.static(`public`));
-APP.use(BODY_PARSER.urlencoded({
-    extended: true
-}));
+APP.use(BODY_PARSER.urlencoded({ extended: true}));
 APP.use(EXPRESS_SANITIZER());
 APP.use(METHOD_OVERRIDE(`_method`));
 
@@ -37,10 +35,7 @@ let libraries = [{
 
 // INDEX
 APP.get(`/libraries`, (req, res) => {
-
-    res.render(`index`, {
-        libraries: libraries
-    });
+    res.render(`index`, { libraries: libraries });
 });
 
 // NEW
@@ -68,18 +63,14 @@ APP.get(`/libraries/:id`, (req, res) => {
     let clickedLibraryID = Number.parseInt(req.params.id);
     let libraryToShow = getLibraryByID(clickedLibraryID);
 
-    res.render(`show`, {
-        library: libraryToShow
-    });
+    res.render(`show`, { library: libraryToShow });
 });
 
 
 function getLibraryByID(clickedLibraryID) {
     
     return libraries.reduce((clickedLibrary, currentLibrary) =>
-        isIDSame(currentLibrary.id, clickedLibraryID) ? 
-            currentLibrary : clickedLibrary, 
-            {});
+        isIDSame(currentLibrary.id, clickedLibraryID) ? currentLibrary : clickedLibrary, {});
 }
 
 function isIDSame(currentLibraryID, clickedLibraryID) {
@@ -92,9 +83,7 @@ APP.get(`/libraries/:id/edit`, (req, res) => {
     let clickedLibraryID = Number.parseInt(req.params.id);
     let libraryToEdit = getLibraryByID(clickedLibraryID);
 
-    res.render(`edit`, {
-        libraryToEdit: libraryToEdit
-    });
+    res.render(`edit`, { libraryToEdit: libraryToEdit });
 });
 
 // UPDATE
